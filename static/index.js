@@ -714,6 +714,33 @@ function fullscreen() {
   ts.getActiveTab().findFirstIFrame().requestFullscreen()
 }
 
+function tabSwitch(parse) {
+    if (parse.value == 'Classroom') {
+      cloakTitle('Home');
+      cloakFavicon('https://ssl.gstatic.com/classroom/ic_product_classroom_144.png');
+    } else if (parse.value == 'Schoology') {
+      cloakTitle('Home | Schoology');
+      cloakFavicon('https://asset-cdn.schoology.com/sites/all/themes/schoology_theme/favicon.ico');
+    } else if (parse.value == 'Mathspace') {
+      cloakTitle('Mathspace');
+      cloakFavicon('https://mathspace-production-static.mathspace.co/static/cache/ea9ab2022ffbb8b29669acc8bd75e6a3b2187553/website/favicons/android-chrome-192x192.png');
+    } else if (parse.value == 'Google') {
+      cloakTitle('Google');
+      cloakFavicon('https://www.google.com/favicon.ico');
+    } else if (parse.value == 'Docs') {
+      cloakTitle('Google Docs');
+      cloakFavicon('https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico');
+    } else if (parse.value == 'Drive') {
+      cloakTitle('Home - Google Drive');
+      cloakFavicon('https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png');
+    } 
+}
+
+function resetTab() {
+  cloakTitle('Abyss')
+  cloakFavicon('assets/favicon.ico')
+}
+
 function bookmark() {
   if (ts.getActiveTab() != null) {
     if (ts.getActiveTab().findFirstIFrame() != null) {

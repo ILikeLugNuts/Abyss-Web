@@ -178,6 +178,29 @@
               />
             </div>
             <div class="abyssCard">
+              <h1>Tab Presets</h1>
+              <br />
+              <h2>Choose a preset:</h2>
+              <select
+                  onchange="tabSwitch(this)"
+                >
+                <option value="blank">Choose an option</option>
+                <option value="Classroom">Google Classroom</option>
+                <option value="Schoology">Schoology</option>
+                <option value="Mathspace">Mathspace</option>
+                <option value="Google">Google</option>
+                <option value="Docs">Google Docs</option>
+                <option value="Drive">Google Drive</option>
+                </select>
+                <br />
+                <h2>Reset Customizations</h2>
+                <button
+                onclick="resetTab();"
+              >
+              Reset
+              </button>
+              </div>
+            <div class="abyssCard">
               <h1>Panic Keys</h1>
               <br />
               <h2>Panic Keybind</h2>
@@ -200,13 +223,15 @@
             <div class="abyssCard">
               <h1>Proxy Backend</h1>
               <br />
+              <h2>Set to Ultraviolet</h2>
               <button
                 onclick="setBackend('uv');if(this.parentElement.querySelector('.dynamic')){this.parentElement.querySelector('.dynamic').classList.remove('active')};this.classList.add('active');"
                 class="uv"
               >
                 Ultraviolet
               </button>
-              <br /><br />
+              <br />
+              <h2>Set to Dynamic</h2>
               <button
                 onclick="setBackend('dynamic');if(this.parentElement.querySelector('.uv')){this.parentElement.querySelector('.uv').classList.remove('active')};this.classList.add('active');"
                 class="dynamic"
