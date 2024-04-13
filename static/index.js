@@ -710,6 +710,10 @@ function addBookmark(bookmark) {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 }
 
+function fullscreen() {
+  ts.getActiveTab().findFirstIFrame().requestFullscreen()
+}
+
 function bookmark() {
   if (ts.getActiveTab() != null) {
     if (ts.getActiveTab().findFirstIFrame() != null) {
