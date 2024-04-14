@@ -339,7 +339,7 @@ window.panicKeys = JSON.parse(localStorage.getItem("panicKeys"));
 
 if (window.panicKeys !== null) {
   document.getElementById("settings-temp").querySelector(".panic").placeholder =
-    "Selected Panic Keys: " + window.panicKeys.join(" + ");
+    "Selected Key: " + window.panicKeys.join(" + ");
 }
 if (window.panicURL !== null) {
   document.getElementById("settings-temp").querySelector(".panicURL").value =
@@ -493,7 +493,7 @@ const runService = async (url, override, overrideadrbar) => {
               .classList.add("active");
             if (window.panicKeys !== null) {
               settingsTemplate.querySelector(".panic").placeholder =
-                "Selected Panic Keys: " + window.panicKeys.join(" + ");
+                "Selected Key: " + window.panicKeys.join(" + ");
             }
             settingsTemplate.querySelector(".panicURL").value = window.panicURL;
             settingsTemplate.querySelector(".tabTitle").placeholder =
