@@ -113,6 +113,7 @@ function engineSwitch(sel) {
   } else if (localStorage.getItem("engine") === "DuckDuckGo") {
     currentSearchURL = "https://duckduckgo.com/?t=h_&q=";
   }
+}
 
 if (localStorage.getItem("engine") === "Google") {
   currentSearchURL = "https://www.google.com/search?q=";
