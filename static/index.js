@@ -269,9 +269,9 @@ const recordKeys = (elem, timeLimit) => {
       }, timeLimit);
     }
     savePush.push(e.key);
-    elem.placeholder = "Selected Key: " + savePush.join(" + ");
+    elem.placeholder = "Selected: " + savePush.join(" + ");
     document.querySelectorAll(".panic").forEach((e) => {
-      e.placeholder = "Selected Key: " + savePush.join(" + ");
+      e.placeholder = "Selected: " + savePush.join(" + ");
     });
   };
   document.addEventListener("keydown", keydownHandler);
@@ -339,7 +339,7 @@ window.panicKeys = JSON.parse(localStorage.getItem("panicKeys"));
 
 if (window.panicKeys !== null) {
   document.getElementById("settings-temp").querySelector(".panic").placeholder =
-    "Selected Key: " + window.panicKeys.join(" + ");
+    "Selected: " + window.panicKeys.join(" + ");
 }
 if (window.panicURL !== null) {
   document.getElementById("settings-temp").querySelector(".panicURL").value =
@@ -493,7 +493,7 @@ const runService = async (url, override, overrideadrbar) => {
               .classList.add("active");
             if (window.panicKeys !== null) {
               settingsTemplate.querySelector(".panic").placeholder =
-                "Selected Key: " + window.panicKeys.join(" + ");
+                "Selected: " + window.panicKeys.join(" + ");
             }
             settingsTemplate.querySelector(".panicURL").value = window.panicURL;
             settingsTemplate.querySelector(".tabTitle").placeholder =
