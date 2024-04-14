@@ -162,6 +162,29 @@ function themeSwitch(sel) {
   localStorage.setItem("theme", sel.value);
 }
 
+function erudaToggle() {
+  var iframe = ts.getActiveTab().findFirstIFrame();
+  if (!iframe) return
+
+  const erudaWindow = iframe.contentWindow
+  const erudaDocument = iframe.contentDocument
+
+  if (!erudaWindow || !erudaDocument) return
+
+  if (erudaWindow.eruda?._isInit) {
+    erudaWindow.eruda.destroy()
+  } else {
+    let script = erudaDocument.createElement('script')
+    script.src = 'https://cdn.jsdelivr.net/npm/eruda'
+    script.onload = function () {
+      if (!erudaWindow) return
+      erudaWindow.eruda.init()
+      erudaWindow.eruda.show()
+    }
+    erudaDocument.head.appendChild(script)
+   
+}
+}
 
 function log() {
   setTimeout(
@@ -821,7 +844,11 @@ function addBookmark(bookmark) {
 }
 
 function fullscreen() {
+  if (ts.getActiveTab() != null) {
   ts.getActiveTab().findFirstIFrame().requestFullscreen()
+} else {
+  alert("You must navigate to a webpage to use this function.")
+}
 }
 
 function launchAB() {
