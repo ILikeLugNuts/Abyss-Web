@@ -248,7 +248,7 @@ const recordKeys = (elem, timeLimit) => {
     savePush.push(e.key);
     elem.placeholder = "Selected Panic Keys: " + savePush.join(" + ");
     document.querySelectorAll(".panic").forEach((e) => {
-      e.placeholder = "Selected Panic Keys: " + savePush.join(" + ");
+      e.placeholder = "Selected Panic Key(s): " + savePush.join(" + ");
     });
   };
   document.addEventListener("keydown", keydownHandler);
