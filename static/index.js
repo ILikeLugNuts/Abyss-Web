@@ -1,3 +1,4 @@
+
 window.tHs = new ThemeSystem();
 
 var darkTheme = new Theme(document.getElementById("default-theme"), "Moon"); // I do not have programming ineptitude, it's just that this works and I don't really care to change it from the older version of the theme system.
@@ -22,6 +23,49 @@ function prependHttps(url) {
     return "https://" + url;
   }
   return url;
+}
+
+
+
+var chosenAdState = localStorage.getItem("adState") || "adchangeon";
+
+if (chosenAdState === "adchangeon") {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = '//pl22667078.profitablegatecpm.com/ed/d6/27/edd627939d21229c8335c92b2a743aa7.js';
+  document.head.appendChild(script);
+} 
+
+function adChange(parse) {
+  localStorage.setItem("adState", parse);
+  chosenAdState = parse;
+  document.querySelectorAll(".adchangeon, .adchangeoff").forEach((e) => {
+    e.classList.remove("active");
+  });
+  document.querySelectorAll("." + parse).forEach((e) => {
+    e.classList.add("active");
+}
+  )
+}
+switch (chosenAdState) {
+case "adchangeon":
+  document
+    .getElementById("settings-temp")
+    .querySelector(".adchangeon")
+    .classList.add("active");
+  break;
+case "adchangeoff":
+  document
+    .getElementById("settings-temp")
+    .querySelector(".adchangeoff")
+    .classList.add("active");
+  break;
+default:
+  document
+    .getElementById("settings-temp")
+    .querySelector(".adchangeon")
+    .classList.add("active");
+  break;
 }
 
 var chosenBackend = localStorage.getItem("backend") || "uv";
@@ -62,11 +106,10 @@ var themeSelected = localStorage.getItem("theme") || "Moon";
 
 function themeSwitch(sel) {
   tHs.setActiveTheme(tHs.getThemeFromName(sel.value));
-  document.querySelectorAll("select").forEach((e) => {
-    e.value = sel.value;
-  });
+  document.getElementById("themeSelect").value = sel.value;
   localStorage.setItem("theme", sel.value);
 }
+
 
 function log() {
   setTimeout(
@@ -287,6 +330,8 @@ const openNewtab = () => {
   ts.setActiveTab(ts.addTab(new Tab()));
 };
 
+
+
 const runService = async (url, override, overrideadrbar) => {
   if (url.trim() == "") return;
   if (ts.getActiveTab() == null) {
@@ -417,7 +462,7 @@ const runService = async (url, override, overrideadrbar) => {
         !override &&
         !/^(https?:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,30}/i.test(url)
       ) {
-        url = "https://www.google.com/search?q=" + url;
+        url = "google.com" + url;
       }
       if (!override && !/^(https?:\/\/)/.test(url)) {
         url = "https://" + url;
