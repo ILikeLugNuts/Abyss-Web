@@ -1,4 +1,3 @@
-
 window.tHs = new ThemeSystem();
 
 var darkTheme = new Theme(document.getElementById("default-theme"), "Moon"); // I do not have programming ineptitude, it's just that this works and I don't really care to change it from the older version of the theme system.
@@ -66,6 +65,38 @@ default:
     .querySelector(".adchangeon")
     .classList.add("active");
   break;
+}
+
+var autoLaunchCookie = localStorage.getItem("autolaunch") || "off";
+
+function autoLaunch() {
+  if (autoLaunchCookie === 'off') {
+    localStorage.setItem("autolaunch", "on");
+    autoLaunchCookie = "on";
+    document.getElementById("autoLaunch").classList.add("active");
+  } else if (autoLaunchCookie === 'on') {
+    localStorage.setItem("autolaunch", "off");
+    autoLaunchCookie = "off";
+    document.getElementById("autoLaunch").classList.remove("active");
+  }
+}
+
+switch (autoLaunchCookie) {
+  case "on":
+    document
+      .getElementById("autoLaunch")
+      .classList.add("active");
+    break;
+  case "off":
+    document
+      .getElementById("autoLaunch")
+      .classList.remove("active");
+    break;
+  default:
+    document
+      .getElementById("autoLaunch")
+      .classList.remove("active");
+    break;
 }
 
 var chosenBackend = localStorage.getItem("backend") || "uv";
@@ -240,6 +271,12 @@ if (document.querySelector("link[rel*='icon']")) {
 }
 
 const cloakFavicon = (url) => {
+  if (!/^(https?:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,30}/i.test(url)) {
+    alert("You must put a valid URL in the URL box.");
+    url = "assets/favicon.ico"
+  } else if (!/^(https?:\/\/)/.test(url)) {
+    url = "https://" + url;
+  } 
   if (url.trim() == "") {
     url = savedFavicon;
   }
@@ -257,6 +294,13 @@ const cloakFavicon = (url) => {
 };
 
 const cloakURL = (url) => {
+   if (!/^(https?:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,30}/i.test(url)) {
+    alert("You must put a valid URL in the URL box.");
+    url = "https://google.com"
+  } else if (!/^(https?:\/\/)/.test(url)) {
+    url = "https://" + url;
+  } 
+
   if (url.trim() == "") {
     url = "https://google.com";
   }
@@ -780,6 +824,48 @@ function fullscreen() {
   ts.getActiveTab().findFirstIFrame().requestFullscreen()
 }
 
+function launchAB() {
+  const popup = open('about:blank', '_blank')
+  if (!popup || popup.closed) {
+    alert('Please allow popups and redirects.')
+  } else {
+    const doc = popup.document
+    const iframe = doc.createElement('iframe')
+    const style = iframe.style
+    const link = doc.createElement('link')
+
+    const name = localStorage.getItem('title') || 'My Drive - Google Drive'
+    const icon = localStorage.getItem('favicon') || 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png'
+
+    doc.title = name
+    link.rel = 'icon'
+    link.href = icon
+
+    iframe.src = location.href
+    style.position = 'fixed'
+    style.top = style.bottom = style.left = style.right = 0
+    style.border = style.outline = 'none'
+    style.width = style.height = '100%'
+
+    doc.head.appendChild(link)
+    doc.body.appendChild(iframe)
+
+    const pLink = localStorage.getItem(encodeURI('pLink')) || 'https://www.google.com/'
+    location.replace(pLink)
+
+    const script = doc.createElement('script')
+    script.textContent = `
+      window.onbeforeunload = function (event) {
+        const confirmationMessage = 'Leave Site?';
+        (event || window.event).returnValue = confirmationMessage;
+        return confirmationMessage;
+      };
+    `
+    doc.head.appendChild(script)
+  }
+}
+
+
 function tabSwitch(parse) {
     if (parse.value == 'Classroom') {
       cloakTitle('Home');
@@ -836,4 +922,50 @@ if (bookmarks.length > 0) {
   });
   document.getElementById("tabContainer").style.height = "calc(100% - 208px)";
   document.getElementById("headerArea").style.height = "198px";
+}
+try {
+  inFrame = window !== top
+} catch (e) {
+  inFrame = true
+}
+
+if (!inFrame && localStorage.getItem("autolaunch") === 'on' && !navigator.userAgent.includes('Firefox')) {
+  const popup = open('about:blank', '_blank')
+  if (!popup || popup.closed) {
+    alert('Please allow popups and redirects.')
+  } else {
+    const doc = popup.document
+    const iframe = doc.createElement('iframe')
+    const style = iframe.style
+    const link = doc.createElement('link')
+
+    const name = localStorage.getItem('title') || 'My Drive - Google Drive'
+    const icon = localStorage.getItem('favicon') || 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png'
+
+    doc.title = name
+    link.rel = 'icon'
+    link.href = icon
+
+    iframe.src = location.href
+    style.position = 'fixed'
+    style.top = style.bottom = style.left = style.right = 0
+    style.border = style.outline = 'none'
+    style.width = style.height = '100%'
+
+    doc.head.appendChild(link)
+    doc.body.appendChild(iframe)
+
+    const pLink = localStorage.getItem(encodeURI('pLink')) || 'https://www.google.com/'
+    location.replace(pLink)
+
+    const script = doc.createElement('script')
+    script.textContent = `
+      window.onbeforeunload = function (event) {
+        const confirmationMessage = 'Leave Site?';
+        (event || window.event).returnValue = confirmationMessage;
+        return confirmationMessage;
+      };
+    `
+    doc.head.appendChild(script)
+  }
 }
