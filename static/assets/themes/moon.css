@@ -20,6 +20,7 @@ html {
     color: var(--color);
     background-image: var(--background);
     background-size: cover;
+    resize:none;
 }
 
 .mainStartContain {
