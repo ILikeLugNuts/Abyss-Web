@@ -229,7 +229,6 @@
               </div>
             <div class="abyssCard">
               <h1>Panic Keys</h1>
-              <br />
               <h2>Panic Keybind</h2>
               <input
                 type="text"
@@ -237,6 +236,7 @@
                 placeholder="Enter key"
                 onclick="recordKeys(this, 500)"
                 class="panic"
+                id="panic"
               />
               <br />
               <h2>Panic Key URL</h2>
@@ -245,7 +245,17 @@
                 placeholder="Enter URL (defaults to Google)"
                 onchange="cloakURL(this.value)"
                 class="panicURL"
+                
               />
+              <br />
+              <br />
+
+              <button
+                onclick="resetPanicBind();"
+                class=""
+              >
+                Reset Panic Keybind
+              </button>
             </div>
             <div class="abyssCard">
               <h1>Proxy Backend</h1>

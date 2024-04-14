@@ -253,6 +253,12 @@ function handleAutocomplete(data) {
   });
 }
 
+function resetPanicBind() {
+  window.panicKeys = null;
+  localStorage.setItem("panicKeys", null);
+  document.getElementById("panic").placeholder = "Enter Key"
+}
+
 const recordKeys = (elem, timeLimit) => {
   if (!elem) return;
   elem.placeholder = "Press a key...";
