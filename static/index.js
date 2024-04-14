@@ -269,9 +269,9 @@ const recordKeys = (elem, timeLimit) => {
       }, timeLimit);
     }
     savePush.push(e.key);
-    elem.placeholder = "Selected Panic Keys: " + savePush.join(" + ");
+    elem.placeholder = "Selected Panic Key: " + savePush.join(" + ");
     document.querySelectorAll(".panic").forEach((e) => {
-      e.placeholder = "Selected Panic Key(s): " + savePush.join(" + ");
+      e.placeholder = "Selected Panic Key: " + savePush.join(" + ");
     });
   };
   document.addEventListener("keydown", keydownHandler);
