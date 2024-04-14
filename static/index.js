@@ -294,10 +294,10 @@ if (document.querySelector("link[rel*='icon']")) {
 }
 
 const cloakFavicon = (url) => {
-  if (!/^(https?:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,30}/i.test(url)) {
+  if (url !== "assets/favicon.ico" && !/^(https?:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,30}/i.test(url)) {
     alert("You must put a valid URL in the URL box.");
     url = "assets/favicon.ico"
-  } else if (!/^(https?:\/\/)/.test(url)) {
+} else if (!/^(https?:\/\/)/.test(url)) {
     url = "https://" + url;
   } 
   if (url.trim() == "") {
