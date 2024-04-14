@@ -102,6 +102,26 @@ switch (chosenBackend) {
     break;
 }
 
+var engineSelected = localStorage.getItem("engine") || "Google";
+var currentSearchURL = "https://www.google.com/search?q="
+function engineSwitch(sel) {
+  localStorage.setItem("engine", sel.value);
+  if (localStorage.getItem("engine") === "Google") {
+    currentSearchURL = "https://www.google.com/search?q=";
+  } else if (localStorage.getItem("engine") === "Bing") {
+    currentSearchURL = "https://www.bing.com/search?q=";
+  } else if (localStorage.getItem("engine") === "DuckDuckGo") {
+    currentSearchURL = "https://duckduckgo.com/?t=h_&q=";
+  }
+
+if (localStorage.getItem("engine") === "Google") {
+  currentSearchURL = "https://www.google.com/search?q=";
+} else if (localStorage.getItem("engine") === "Bing") {
+  currentSearchURL = "https://www.bing.com/search?q=";
+} else if (localStorage.getItem("engine") === "DuckDuckGo") {
+  currentSearchURL = "https://duckduckgo.com/?t=h_&q=";
+} 
+
 var themeSelected = localStorage.getItem("theme") || "Moon";
 
 function themeSwitch(sel) {
@@ -462,7 +482,7 @@ const runService = async (url, override, overrideadrbar) => {
         !override &&
         !/^(https?:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,30}/i.test(url)
       ) {
-        url = "google.com" + url;
+        url = currentSearchURL + url;
       }
       if (!override && !/^(https?:\/\/)/.test(url)) {
         url = "https://" + url;
