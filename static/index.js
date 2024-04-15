@@ -469,7 +469,7 @@ const runService = async (url, override, overrideadrbar) => {
           document.getElementById("adrbar").placeholder = defaultPlaceholder;
           return;
         case "games":
-          runService("https://radon.games/");
+          runService("https://silkmajoritydifference.github.io/");
           return;
         case "settings":
           const settingsPlaceholder = "Abyss Settings (abyss://settings)";
